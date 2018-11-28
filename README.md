@@ -10,17 +10,18 @@ Add this line to your application's Gemfile:
 gem "devmaker_rails_sdk", git: "https://bitbucket.org/RudineyFranceschi/devmaker_rails_sdk.git"
 ```
 
-You need access to this private bitbucket repo. You can set your username and password with:
+You need to have access to this private bitbucket repo from your bitbucket account. Then you can set your username and password with:
 ```bash
-bundle config bitbucket.org DevMakerApps:THE_SUPER_SECRET_PASSWORD
-```
-
-on heroku, you need to set it as an ENV var:
-```bash
-heroku config:set BUNDLE_BITBUCKET__ORG=DevMakerApps:THE_SUPER_SECRET_PASSWORD
+bundle config bitbucket.org YourBitbucketUsername:THE_SUPER_SECRET_PASSWORD
 ```
 
 And then execute:
 ```bash
 $ bundle
+```
+
+## Deploy an app using this private gem:
+On heroku, use the `DevMakerApps` user to access, you need to set it as an ENV var:
+```bash
+heroku config:set BUNDLE_BITBUCKET__ORG=DevMakerApps:THE_SUPER_SECRET_PASSWORD
 ```

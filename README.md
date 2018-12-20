@@ -1,6 +1,9 @@
 # DevmakerRailsSdk
 Bunch of helper code for your DevMaker Rails project
 
+# Todo
+-  move the push notification class (and its `fcm` gem dependency) to a new gem (does not need to be an engine)
+
 ## Usage
 
 

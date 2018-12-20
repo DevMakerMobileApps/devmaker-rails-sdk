@@ -1,3 +1,8 @@
+# Nice Rails resources:
+- https://guides.rubyonrails.org
+- https://www.theodinproject.com/courses/ruby-on-rails
+- https://thoughtbot.com/upcase/rails
+
 # New Project Setup:
 
 ## Bare Start:
@@ -26,18 +31,18 @@
 1. Amazon AWS Console (login with: infra.devmaker@gmail.com)
 1. Create a bucket and copy the configs from other bucket
 1. set the current CORS polycy
-```
-<?xml version="1.0" encoding="UTF-8"?>
-  <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-  <CORSRule>
-      <AllowedOrigin>*</AllowedOrigin>
-      <AllowedMethod>GET</AllowedMethod>
-      <AllowedMethod>POST</AllowedMethod>
-      <AllowedMethod>PUT</AllowedMethod>
-      <AllowedHeader>*</AllowedHeader>
-  </CORSRule>
-</CORSConfiguration>
-```
+    ```
+    <?xml version="1.0" encoding="UTF-8"?>
+      <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+      <CORSRule>
+          <AllowedOrigin>*</AllowedOrigin>
+          <AllowedMethod>GET</AllowedMethod>
+          <AllowedMethod>POST</AllowedMethod>
+          <AllowedMethod>PUT</AllowedMethod>
+          <AllowedHeader>*</AllowedHeader>
+      </CORSRule>
+    </CORSConfiguration>
+    ```
 1. create a new IAM user for the project
 1. set permission on this project buckets only (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_s3_rw-bucket.html)
 1. Copy ID + Secret and Add them to s3 key at `rails credentials:edit`
@@ -130,15 +135,56 @@
 1. `heroku apps:create cartax-staging --remote=staging`
 1. `heroku buildpacks:add heroku/nodejs`
 1. `heroku buildpacks:add heroku/ruby`
+1. `heroku config:set BUNDLE_BITBUCKET__ORG=DevMakerApps:THE_SUPER_SECRET_PASSWORD` (if the project uses this gem from the private bitbucket repo)
 1. `heroku config:set RAILS_ENV=staging -a YYYY-staging`
 1. `heroku config:set RAILS_MASTER_KEY=[master.key string] -a YYYY-staging`
-1. create a `Procfile` file at root with:
-```
-web: bundle exec puma -C config/puma.rb
-release: bundle exec rake db:migrate
-```
+1. create a `Procfile` file at root (maybe the first time you create the database you cant have the `release` Procfile line)
+    ```
+    web: bundle exec puma -C config/puma.rb
+    release: bundle exec rake db:migrate
+    ```
+1. Configure the heroku final url: (at production.rb or staging.rb)
+    ```
+    Rails.application.routes.default_url_options = {host: "http://YOUR-APP-NAME-HERE.herokuapp.com"}
+    config.action_mailer.default_url_options = Rails.application.routes.default_url_options
+    config.action_controller.default_url_options = Rails.application.routes.default_url_options
+    ```
+1. replace the default js_compressor to enable Uglyfier harmony mode: `config.assets.js_compressor = Uglifier.new(harmony: true)`
 1. Create a staging rails env and set at the heroku staging app
-  1. copy `config/production.rb` and change url
-  1. change the `database.yml` to set staging like prod
+    1. copy `config/production.rb` and change url
+    1. change the `database.yml` to set staging like prod
 1. set this to `staging.rb` and `production.rb`:
-  1. `config.assets.js_compressor = Uglifier.new(harmony: true)`
+    1. `config.assets.js_compressor = Uglifier.new(harmony: true)`
+1. After the deploy is done:
+    1. `heroku run rake db:schema:load -a YYYYYYY`
+    1. `heroku run rake db:seed -a YYYYYYY`
+
+
+# Emails with fancy styles?
+1. Consider: https://github.com/TedGoas/Cerberus
+
+# Production Background Jobs Structure
+1. Start understanding how Rails ActiveJob works: https://guides.rubyonrails.org/active_job_basics.html
+1. Instal redis in your machine (`brew install redis`?)
+1. Add (or buy) the `Heroku Redis` addon to your heroku app
+1. Add sidekiq and redis gems:
+    ```
+    gem "redis", "~> 3.0"
+    gem "sidekiq"
+    ```
+1. Run `bundle install`
+1. Tell Heroku to start a new process to run `sidekiq` by adding this to `Procfile.dev`:
+    ```
+    worker: bundle exec sidekiq -e production -c 10
+    ```
+1. Check if you have to pay for this new process at your heroku app
+1. Add `config.active_job.queue_adapter = :sidekiq` to `config/application.rb`
+1. Add the sidekiq web interface by adding `mount Sidekiq::Web => "/sidekiq"` to `routes.rb`
+1. Require a username and password authentication for this ui in production:
+    1. add this to the *top* of the `routes.rb`:
+    ```
+    Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+      ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_USERNAME"])) &
+        ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_PASSWORD"]))
+    end if Rails.env.production?
+    ```

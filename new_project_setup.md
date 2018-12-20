@@ -169,7 +169,7 @@
 1. Add (or buy) the `Heroku Redis` addon to your heroku app
 1. Add sidekiq and redis gems:
     ```
-    gem "redis", "~> 3.0"
+    gem "redis", "~> 4.0"
     gem "sidekiq"
     ```
 1. Run `bundle install`

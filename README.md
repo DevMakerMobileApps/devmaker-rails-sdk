@@ -6,16 +6,17 @@ Bunch of helper code for your DevMaker Rails project
 
 ## Usage
 
-
 ## Installation
 Add this line to your application's Gemfile:
 ```ruby
-gem "devmaker_rails_sdk", git: "https://bitbucket.org/RudineyFranceschi/devmaker_rails_sdk.git"
+gem "devmaker_rails_sdk", git: "https://gitlab.com/devmaker-mobile-apps/rails/devmaker-rails-sdk.git"
 ```
 
-You need to have access to this private bitbucket repo from your bitbucket account. Then you can set your username and password with:
+You need to have access to this private gitlab repo from your gitlab account.
+
+So you give bundler an user and password. This is the command:
 ```bash
-bundle config bitbucket.org YourBitbucketUsername:THE_SUPER_SECRET_PASSWORD
+bundle config gitlab.com GitLabUsername:GITLAB_PASSWORD
 ```
 
 And then execute:
@@ -24,7 +25,7 @@ $ bundle
 ```
 
 ## Deploy an app using this private gem:
-On heroku, use the `DevMakerApps` user to access, you need to set it as an ENV var:
+On heroku, use the `@devmaker-ci-cd` gitlab user to access, you need to set it as an ENV var:
 ```bash
-heroku config:set BUNDLE_BITBUCKET__ORG=DevMakerApps:THE_SUPER_SECRET_PASSWORD
+heroku config:set BUNDLE_GITLAB__COM=devmaker-ci-cd:THE_SUPER_SECRET_PASSWORD
 ```

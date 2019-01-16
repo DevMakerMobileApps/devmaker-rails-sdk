@@ -118,6 +118,7 @@
 
 ## Setup Postgis:
 1. locally install postgis: `brew install postgis`
+2. :warning: graphiql-rails has a bug. use version < 1.5 (see: https://github.com/rmosolgo/graphiql-rails/issues/58)
 1. gem: https://github.com/rgeo/activerecord-postgis-adapter
 1. heroku setup: https://devcenter.heroku.com/articles/postgis
 1. change rails database config:

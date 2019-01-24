@@ -176,7 +176,7 @@
 1. Run `bundle install`
 1. Tell Heroku to start a new process to run `sidekiq` by adding this to `Procfile.dev`:
     ```
-    worker: bundle exec sidekiq -e production -c 10
+    worker: bundle exec sidekiq -e $RAILS_ENV -c 10
     ```
 1. Check if you have to pay for this new process at your heroku app
 1. Add `config.active_job.queue_adapter = :sidekiq` to `config/application.rb`

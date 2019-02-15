@@ -87,6 +87,7 @@
 1. see http://graphql-ruby.org/getting_started
 1. add `gem "graphql"`
 1. `bin/rails generate graphql:install --schema=PublicSchema`
+2. :warning: graphiql-rails has a bug. use version < 1.5 (see: https://github.com/rmosolgo/graphiql-rails/issues/58)
 1. Move & Rename genetared `MutationType` & `QueryType` to `PublicMutationType` & `PublicQueryType` at the schema also
 1. copy the `GraphqlControllerMixin` controller concern
 1. move & change the `GraphqlController` to `Public/GraphqlController`
@@ -118,7 +119,6 @@
 
 ## Setup Postgis:
 1. locally install postgis: `brew install postgis`
-2. :warning: graphiql-rails has a bug. use version < 1.5 (see: https://github.com/rmosolgo/graphiql-rails/issues/58)
 1. gem: https://github.com/rgeo/activerecord-postgis-adapter
 1. heroku setup: https://devcenter.heroku.com/articles/postgis
 1. change rails database config:

@@ -56,7 +56,7 @@
     1. follow after install instructions
     1. `root "admin/dashboard#index"`
     1. dont need to generate the views yet
-    1. add devise pt-BR translations: https://gist.github.com/hasken-14/df6171f5a183fb61b0d4ad361af1c445
+    1. add devise pt-BR translations with the gem: https://github.com/tigrish/devise-i18n
 1. Generate de user devise model: `rails generate devise User`
 1. create the admin model with a polymorphic has_one relation to user
 1. add the polymorphic association

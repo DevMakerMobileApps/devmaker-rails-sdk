@@ -136,7 +136,7 @@
 1. `heroku apps:create cartax-staging --remote=staging`
 1. `heroku buildpacks:add heroku/nodejs`
 1. `heroku buildpacks:add heroku/ruby`
-1. `heroku config:set BUNDLE_BITBUCKET__ORG=DevMakerApps:THE_SUPER_SECRET_PASSWORD` (if the project uses this gem from the private bitbucket repo)
+1. `heroku config:set BUNDLE_GITLAB__COM=devmaker-ci-cd:THE_SUPER_SECRET_PASSWORD` (if the project uses this gem from the private gitlab repo)
 1. `heroku config:set RAILS_ENV=staging -a YYYY-staging`
 1. `heroku config:set RAILS_MASTER_KEY=[master.key string] -a YYYY-staging`
 1. create a `Procfile` file at root (maybe the first time you create the database you cant have the `release` Procfile line)

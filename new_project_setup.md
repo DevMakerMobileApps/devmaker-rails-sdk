@@ -239,7 +239,7 @@
 ## Testing if websocket is working to message user
 
 1. You must have user authentication system and at least one registered user (in our example we name it user1 = User.find(1))
-1. Configure the development adapter in config/cable.yml:
+1. Configure the development adapter in `config/cable.yml`:
     ```
     development:
       adapter: redis
@@ -247,7 +247,7 @@
       channel_prefix: {your-project}_development
      ```
      
-1. Create a file test.coffee on the directory app/assets/javascripts and add the following content to it:
+1. Create a file `test.coffee` on the directory `app/assets/javascripts` and add the following content to it:
     ```
     App.room = App.cable.subscriptions.create "NotificationsChannel",
       connected: ->
@@ -255,7 +255,7 @@
       received: (data) ->
         console.log(data['message'])
     ```
-1. Add the created test.coffee and cable.js to the admin.js
+1. Add the created `test.coffee` and `cable.js` to the `admin.js`
     ```
     //= require cable.js
     //= require test.coffee

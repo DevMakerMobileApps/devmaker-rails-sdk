@@ -190,7 +190,7 @@
         ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_PASSWORD"]))
     end if Rails.env.production?
     ```
-# ActionCable Setup (for send notifications using websocket to each user)
+# ActionCable Setup (for send notifications to each user using websocket)
 
 1. Add redis gem:
     ```
@@ -232,3 +232,7 @@
       end
     end 
     ```  
+1. Add the following configuration to the module Pattern in config/application.rb:
+    ```
+    config.action_cable.disable_request_forgery_protection = true
+    ```

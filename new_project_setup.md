@@ -190,3 +190,45 @@
         ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_PASSWORD"]))
     end if Rails.env.production?
     ```
+# ActionCable Setup (for send notifications using websocket to each user)
+
+1. Add redis gem:
+    ```
+    gem "redis", "~> 4.0"
+    ```
+1. Run `bundle install`
+1. Create NotificationsChannel (notifications_channel.rb) in app/channels
+    ```
+    class NotificationsChannel < ApplicationCable::Channel
+      def subscribed
+        stream_for current_user
+      end
+    end
+    ```
+1. Change the class Connection in channels/application_cable/connection.rb:
+    ```
+    module ApplicationCable
+      class Connection < ActionCable::Connection::Base
+        identified_by :current_user
+    
+        def connect
+          self.current_user = find_verified_user
+          logger.add_tags "ActionCable", current_user.id
+        end
+    
+        protected
+    
+        def find_verified_user
+          puts("verifying")
+          verified_user = env["warden"].user || User.find_by(id: access_token&.resource_owner_id)
+          verified_user || reject_unauthorized_connection
+        end
+    
+        def access_token
+          @access_token ||= Doorkeeper::AccessToken.by_token(
+            request.query_parameters[:token]
+          )
+        end
+      end
+    end 
+    ```  

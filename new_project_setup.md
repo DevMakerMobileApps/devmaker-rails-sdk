@@ -190,7 +190,7 @@
         ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_PASSWORD"]))
     end if Rails.env.production?
     ```
-# ActionCable Setup (for send notifications to each user using websocket)
+# ActionCable Setup (to send notifications to each user using websocket)
 
 1. Add redis gem:
     ```

@@ -1,7 +1,7 @@
 module DevmakerRailsSdk
   module GraphqlControllerMixin
     def execute
-      result = schema.execute(params[:query], variables: variables, context: context, operation_name: params[:operationName])
+      result = params[:_json] ? multiplex_execution(params) : single_execution(params)
       render json: result
     rescue => e
       raise e unless Rails.env.development?
@@ -21,6 +21,23 @@ module DevmakerRailsSdk
     end
 
     protected
+
+    def single_execution(params)
+      schema.execute(params[:query], variables: variables, context: context, operation_name: params[:operationName])
+    end
+
+    def multiplex_execution(params)
+      queries = params[:_json].map do |param|
+        {
+          query: param[:query],
+          operation_name: param[:operationName],
+          variables: variables,
+          context: context,
+        }
+      end
+
+      schema.multiplex(queries)
+    end
 
     # Handle form data, JSON body, or a blank value
     def ensure_hash(ambiguous_param)
@@ -44,7 +61,7 @@ module DevmakerRailsSdk
       logger.error e.message
       logger.error e.backtrace.join("\n")
 
-      render json: {error: {message: e.message, backtrace: e.backtrace}, data: {}}, status: 500
+      render json: { error: { message: e.message, backtrace: e.backtrace }, data: {} }, status: 500
     end
   end
 end

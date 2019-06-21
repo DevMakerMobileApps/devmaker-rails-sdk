@@ -9,9 +9,10 @@ Bunch of helper code for your DevMaker Rails project
 ## Usage
 
 ## Installation
-Add this line to your application's Gemfile:
+Add this 2 lines to your application's Gemfile:
 ```ruby
-gem "devmaker_rails_sdk", git: "https://gitlab.com/devmaker-mobile-apps/rails/devmaker-rails-sdk.git"
+gem "devmaker_rails_sdk", git: "https://gitlab.com/devmaker-mobile-apps/rails/devmaker-rails-sdk.git", tag: "2.0.0"
+gem "apollo_upload_server", "2.0.0.beta.3"
 ```
 
 You need to have access to this private gitlab repo from your gitlab account.

@@ -1,8 +1,8 @@
 module DevmakerRailsSdk
   module Types
     module Scalars
-      class FileType < ::Types::BaseScalar
-        graphql_name "File"
+      class UploadType < ::Types::BaseScalar
+        graphql_name "Upload"
         description "Action Dispatch Uploaded File"
 
         def self.coerce_input(file, context)

@@ -2,7 +2,7 @@ Description:
     Explain the generator
 
 Example:
-    rails generate admin_template Thing
+    rails generate devmaker_rails_sdk:admin_template Thing
 
     This will create:
         what/will/it/create

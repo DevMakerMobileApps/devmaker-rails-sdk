@@ -2,7 +2,7 @@ Description:
     Explain the generator
 
 Example:
-    rails generate admins_crud Thing
+    rails generate devmaker_rails_sdk:admins_crud Thing
 
     This will create:
         what/will/it/create

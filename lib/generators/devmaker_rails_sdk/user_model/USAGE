@@ -1,8 +1,20 @@
 Description:
-    Explain the generator
+    Run this generator any moment when you want create a new user
+    After this you will need run the migrations: `rails db:migrate`
 
 Example:
-    rails generate user_model Thing
+    rails generate devmaker_rails_sdk:user_model YOURMODELNAME field:type field:type
 
     This will create:
-        what/will/it/create
+      * your model with relation with user
+      * migration with your params
+      * user scope for your model
+      * factory to rspec
+      * add test to user_spec for your model
+      * scope with search for
+      * ask if you want generate list of this user with admin panel
+          * if yes generate:
+              * controller in admin/
+              * views in views/admin/your_user_model
+              * add a menu link
+              * add route

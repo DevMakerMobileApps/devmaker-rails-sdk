@@ -2,7 +2,7 @@ Description:
     Explain the generator
 
 Example:
-    rails generate setup_devise Thing
+    rails generate devmaker_rails_sdk:setup_devise Thing
 
     This will create:
         what/will/it/create

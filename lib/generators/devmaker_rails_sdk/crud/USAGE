@@ -1,8 +1,17 @@
 Description:
-    Explain the generator
+    Run this generator any moment when you want to create any crud
+    After this you need run the migration: `rails db:migrate`
+
+    Then, start your server, use admins credentials to login and see your crud!
 
 Example:
-    rails generate crud Thing
+    rails generate devmaker_rails_sdk:crud YOURMODELNAME field:type field:type
 
     This will create:
-        what/will/it/create
+      * controller in the admin folder
+      * all scaffold views
+      * generate the model
+      * generate the factory to rspec
+      * add scope search_for to model
+      * use pagination to index page
+      * add menu item for your crud

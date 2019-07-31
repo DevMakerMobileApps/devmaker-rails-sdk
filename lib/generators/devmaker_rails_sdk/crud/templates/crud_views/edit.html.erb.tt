@@ -1,0 +1,5 @@
+<h4 class="font-weight-bold py-3 mb-4">
+    <%= name_downcase.singularize.camelize %> #<%%= @<%= name_downcase.singularize %>.id  %>
+</h4>
+
+<%%= render('form', admin: @<%= name_downcase.singularize %>) %>

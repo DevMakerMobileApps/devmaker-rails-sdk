@@ -1,0 +1,10 @@
+Description:
+    Generate the admin template
+    Setup devise
+    Run admin crud
+
+Example:
+    rails generate setup
+
+    This will create:
+        what/will/it/create

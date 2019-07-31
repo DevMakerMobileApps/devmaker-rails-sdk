@@ -1,0 +1,25 @@
+<div class="row no-gutters">
+  <div class="col-sm-6 col-md-8 col-lg-7 col-xl-8">
+    <div class="media align-items-center py-3 mb-3">
+      <div class="media-body ml-4">
+        <h4 class="font-weight-bold mb-0"><%= @admin.name %></h4>
+        <div class="text-muted font-weight-normal"><%= @admin.email %></div>
+        <%= link_to('Editar', edit_admin_admin_path(@admin), class: 'btn btn-primary btn-sm') %>
+
+        <%= link_to(admin_admin_path(@admin), method: :delete, data: { confirm: 'Você tem certeza?' },  class: 'btn btn-outline-danger btn-sm icon-btn borderless') do %>
+          <span class="fas fa-trash-alt"></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4 col-lg-5 col-xl-4">
+    <div class="py-1 px-3 ui-bordered">
+      <div class="text-muted small">Criado em</div>
+      <div class="font-weight-semibold"><%= I18n.l(@admin.created_at, format: :long) %></div>
+    </div>
+    <div class="py-1 px-3 ui-bordered mb-4">
+      <div class="text-muted small">Última Atualização</div>
+      <div class="font-weight-semibold"><%= I18n.l(@admin.updated_at, format: :long) %></div>
+    </div>
+  </div>
+</div>

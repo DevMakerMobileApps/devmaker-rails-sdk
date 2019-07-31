@@ -1,0 +1,36 @@
+<%= bootstrap_form_with(model: [:admin, admin], local: true) do |f| %>
+
+  <%= render('layouts/form_record_errors', record: admin) %>
+
+  <div class="card">
+    <div class="card-body">
+      <%= f.text_field :name %>
+
+      <hr>
+      <h5>Dados de Acesso:</h5>
+      <%= f.fields_for :user do |uf| %>
+        <%= uf.text_field :email %>
+        <div class="form-row">
+          <div class="col-6">
+            <%= uf.password_field :password %>
+          </div>
+          <div class="col-6">
+            <%= uf.password_field :password_confirmation %>
+          </div>
+        </div>
+      <% end -%>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between mt-3">
+      <div>
+        <%= link_to('Voltar', admin_admins_path, class: 'btn btn-default') %>
+        <% if admin.persisted? %>
+          <%= link_to(admin_admin_path(admin), method: :delete, data: { confirm: 'Você tem certeza?' },  class: 'btn btn-outline-danger icon-btn borderless') do %>
+            <span class="fas fa-trash-alt"></span>
+          <% end %>
+        <% end %>
+      </div>
+      <%= f.submit('Salvar', class: 'btn btn-primary', data: {disable_with: 'Aguarde...'} ) %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,61 @@
+<h4 class="font-weight-bold py-3 mb-4">
+    <%= name.pluralize.titleize %>
+</h4>
+
+<div class="row justify-content-between mb-3">
+  <div class="col-4">
+  <%%= form_tag(admin_<%= name_downcase.pluralize %>_path, method: :get) do |f| %>
+    <div class="input-group">
+        <%%= text_field_tag(:q, params[:q], class: "form-control", placeholder: 'Pesquisar') %>
+        <span class="input-group-append">
+          <button class="btn btn-default" type="submit">
+            <span class="fas fa-search"></span>
+          </button>
+        </span>
+    </div>
+  <%%  end %>
+  </div>
+
+  <div class="col-4 text-right">
+    <%%= link_to(new_admin_<%= name_downcase.singularize %>_path, class: "btn btn-primary" ) do %>
+      <span class="fas fa-plus"></span>Adicionar</button>
+    <%% end %>
+  </div>
+</div>
+
+
+<div class="card">
+  <table class="table card-table">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>E-mail</th>
+        <% params.each do |attribute| -%><th><%= attribute.split(":")[0].humanize %></th>
+        <% end -%><th>Criado Em</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%% @<%= name_downcase.pluralize %>.each do |<%= name_downcase %>| %>
+        <tr>
+          <th scope="row"><%%= <%= name_downcase %>.id  %></th>
+          <td><%%= <%= name_downcase %>.email  %></td>
+          <% params.each do |attribute| -%><td><%%= <%= name_downcase %>.<%= attribute.split(":")[0] %> %></td>
+          <% end -%><td>
+            <%%= I18n.l(<%= name_downcase %>.created_at, format: :short) %>
+          </td>
+          <td width='90px'>
+            <%%= link_to(edit_admin_<%= name_downcase.singularize %>_path(<%= name_downcase %>), class: 'btn btn-default btn-sm icon-btn') do %>
+              <span class="fas fa-edit"></span>
+            <%% end %>
+
+            <%%= link_to(admin_<%= name_downcase.singularize %>_path(<%= name_downcase %>), method: :delete, data: { confirm: 'Você tem certeza?' },  class: 'btn btn-outline-danger btn-sm icon-btn borderless') do %>
+              <span class="fas fa-trash-alt"></span>
+            <%% end %>
+          </td>
+        </tr>
+      <%% end %>
+  </table>
+</div>
+
+<%%= paginate @<%= name_downcase.pluralize %> %>

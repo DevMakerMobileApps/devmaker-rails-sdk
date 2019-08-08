@@ -1,0 +1,63 @@
+<h4 class="font-weight-bold py-3 mb-4">
+  Admins
+</h4>
+
+<div class="row justify-content-between mb-3">
+  <div class="col-4">
+  <%= form_tag(admin_admins_path, method: :get) do |f| %>
+    <div class="input-group">
+        <%= text_field_tag(:q, params[:q], class: "form-control", placeholder: 'Pesquisar') %>
+        <span class="input-group-append">
+          <button class="btn btn-default" type="submit">
+            <span class="fas fa-search"></span>
+          </button>
+        </span>
+    </div>
+  <% end %>
+  </div>
+
+  <div class="col-4 text-right">
+    <%= link_to(new_admin_admin_path, class: "btn btn-primary" ) do %>
+      <span class="fas fa-plus"></span>&nbsp; Adicionar</button>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="card">
+  <table class="table card-table">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Criado Em</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @admins.each do |u| %>
+        <tr>
+          <th scope="row"><%= u.id  %></th>
+          <td>
+            <%= link_to(u.name, [:admin, u])  %>
+          </td>
+          <td><%= u.email  %></td>
+          <td>
+            <%= I18n.l(u.created_at, format: :short) %>
+          </td>
+          <td width='90px'>
+            <%= link_to(edit_admin_admin_path(u), class: 'btn btn-default btn-sm icon-btn') do %>
+              <span class="fas fa-edit"></span>
+            <% end %>
+
+            <%= link_to(admin_admin_path(u), method: :delete, data: { confirm: 'Você tem certeza?' },  class: 'btn btn-outline-danger btn-sm icon-btn borderless') do %>
+              <span class="fas fa-trash-alt"></span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+  </table>
+</div>
+
+<%= paginate @admins %>

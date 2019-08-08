@@ -1,0 +1,14 @@
+Description:
+    Run this generator once when you want to setup your graphql api
+    After this you can start your server `rails server`
+    and see your public graphiql on `http://localhost:3000/graphiql`
+
+Example:
+    rails generate devmaker_rails_sdk:graphql
+
+    This will create:
+      * graphql setup
+      * public schema to graphql
+      * create a route to public schema
+      * generate a mutation_type and query_type on graphql/types/public
+      * custom redirect page on user login

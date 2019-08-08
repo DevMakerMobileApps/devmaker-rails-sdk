@@ -1,0 +1,5 @@
+<h4 class="font-weight-bold py-3 mb-4">
+  Novo <%= name_downcase.singularize %>
+</h4>
+
+<%%= render('form', admin: @<%= name_downcase.singularize %>) %>

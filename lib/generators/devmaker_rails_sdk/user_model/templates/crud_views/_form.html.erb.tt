@@ -1,0 +1,31 @@
+<%%= bootstrap_form_with(model: [:admin, @<%= name_downcase.singularize %>], local: true) do |f| %>
+
+  <%%= render('layouts/form_record_errors', record: @<%= name_downcase.singularize %>) %>
+
+  <div class="card">
+    <div class="card-body">
+        <% params.each do |attribute| -%><%%= f.text_field :<%= attribute.split(":")[0] %> %> <% end -%>
+
+        <hr>
+        <h5>Dados de Acesso:</h5>
+        <%%= f.fields_for :user do |uf| %>
+        <%%= uf.text_field :email %>
+        <div class="form-row">
+            <div class="col-6">
+                <%%= uf.password_field :password %>
+            </div>
+            <div class="col-6">
+                <%%= uf.password_field :password_confirmation %>
+            </div>
+        </div>
+        <%% end -%>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between mt-3">
+      <div>
+        <%%= link_to('Voltar', admin_<%= name_downcase.pluralize %>_path, class: 'btn btn-default') %>
+      </div>
+      <%%= f.submit('Salvar', class: 'btn btn-primary', data: {disable_with: 'Aguarde...'} ) %>
+    </div>
+  </div>
+<%% end %>

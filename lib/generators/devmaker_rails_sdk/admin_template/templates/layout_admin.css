@@ -1,0 +1,25 @@
+/*
+ *= require bootstrap.css
+ *= require appwork.css
+ *= require theme-corporate.css
+ *= require colors.css
+ *= require uikit.css
+ *= require fontawesome.css
+ *= require rails_bootstrap_forms
+ *= require growl/growl.css
+ *= require bootstrap-datepicker/bootstrap-datepicker.css
+ *= require typeahead-js/typeahead.css
+ *= require dropzone/dropzone.css
+ *= require perfect-scrollbar/perfect-scrollbar.css
+ *= require bootstrap-daterangepicker/bootstrap-daterangepicker.css
+ *= require bootstrap-tagsinput/bootstrap-tagsinput.css
+ *= require bootstrap-select/bootstrap-select.css
+ *= require bootstrap-multiselect/bootstrap-multiselect.css
+ *= require select2/select2.css
+ *= require c3/c3.css
+ *= require_self
+*/
+
+label.required:after {
+    content: " *";
+}

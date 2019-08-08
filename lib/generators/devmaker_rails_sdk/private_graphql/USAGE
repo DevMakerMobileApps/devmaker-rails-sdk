@@ -1,0 +1,13 @@
+Description:
+    Run this generator any moment when you want to create a private graphiql api
+    BUT, you need to first create your user_model with `rails g devmaker_rails_sdk:user_model YOURMODELNAME`
+    After this you can sign in and click on GO TO GRAPHIQL and run the query me
+
+Example:
+    rails generate devmaker_rails_sdk:private_graphql YOURUSERMODELNAME
+
+    This will create:
+      * new private schema
+      * new graphql controller with autentication
+      * new mutation_type and query_type, with query me
+      * route to private api

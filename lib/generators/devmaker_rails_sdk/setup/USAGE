@@ -1,0 +1,24 @@
+Description:
+    Run this generator after create a new project
+
+    After generate this you can run your server `rails server`
+
+    To login use this credentials:
+      * admin@teste.com
+      * 123456
+
+    To run rspec run: bin/rspec
+
+Example:
+    rails generate devmaker_rails_sdk:setup
+
+    The setup generator create:
+      * your database
+      * all assets to admin template
+      * setup for rspec
+      * setup devise
+      * dependencies to package.json
+      * kaminari views
+      * custom login page for device
+      * admins crud
+      * admins seed

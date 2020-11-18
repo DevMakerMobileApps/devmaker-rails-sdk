@@ -32,16 +32,22 @@
 1. Create a bucket and copy the configs from other bucket
 1. set the current CORS polycy
     ```
-    <?xml version="1.0" encoding="UTF-8"?>
-      <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-      <CORSRule>
-          <AllowedOrigin>*</AllowedOrigin>
-          <AllowedMethod>GET</AllowedMethod>
-          <AllowedMethod>POST</AllowedMethod>
-          <AllowedMethod>PUT</AllowedMethod>
-          <AllowedHeader>*</AllowedHeader>
-      </CORSRule>
-    </CORSConfiguration>
+    [
+        {
+            "AllowedHeaders": [
+                "*"
+            ],
+            "AllowedMethods": [
+                "GET",
+                "POST",
+                "PUT"
+            ],
+            "AllowedOrigins": [
+                "*"
+            ],
+            "ExposeHeaders": []
+        }
+    ]
     ```
 1. create a new IAM user for the project
 1. set permission on this project buckets only (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_s3_rw-bucket.html)

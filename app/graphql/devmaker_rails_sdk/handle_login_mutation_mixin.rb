@@ -33,12 +33,7 @@ module DevmakerRailsSdk
     end
 
     def create_access_token_for!(app:, user:)
-      Doorkeeper::AccessToken.create!({
-        application: app,
-        resource_owner_id: user.id,
-        expires_in: Doorkeeper.configuration.access_token_expires_in,
-        use_refresh_token: Doorkeeper.configuration.refresh_token_enabled?,
-      })
+      Doorkeeper::AccessToken.find_or_create_by!({ application: app, resource_owner_id: user.id })
     end
   end
 end
